@@ -1,4 +1,3 @@
-using System.Reflection;
 using System.Text.RegularExpressions;
 using System;
 using AngleSharp;
@@ -30,6 +29,10 @@ namespace Asianscreens
             var response = await httpClient.GetAsync(
                 $"https://www.asianscreens.com/directory/{searchName[0]}.asp"
             );
+
+            if (!response.IsSuccessStatusCode)
+                return new (string, string, Uri)[] { };
+
             var html = await response.Content.ReadAsStringAsync();
             var doc = await context.OpenAsync(req => req.Content(html));
 

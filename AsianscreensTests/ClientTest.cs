@@ -55,6 +55,13 @@ namespace Tests
         }
 
         [Test]
+        public async Task TestSearchInvalid()
+        {
+            var results = await client.Search("æŒç”°æ žé‡Œ");
+            Assert.AreEqual(0, results.Count());
+        }
+
+        [Test]
         public async Task TestSearchFirst()
         {
             var result = await client.SearchFirst("Ai Uehara");
